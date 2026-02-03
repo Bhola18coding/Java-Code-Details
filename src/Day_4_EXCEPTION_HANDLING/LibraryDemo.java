@@ -2,26 +2,48 @@ package Day_4_EXCEPTION_HANDLING;
 
 
 //D). Custom Exception
-class hey{
 
+//(IX) InvalidException
+class InvalidMemberException extends  Exception{
+    public InvalidMemberException(String message) {
+        super(message);
+    }
 }
+
+
+//(i) Custom Exception Class = yeh hum apna exception class bana rhe h , Yeh child class hoga Exception class ka Jo ki parent class h sb exception ka
+class BookUnavailableException extends  Exception{
+
+    //(ii) Ex construction create krenge that is message aur uss method ko parent class ko pass kr denge
+
+    public BookUnavailableException(String message) {
+        super(message);
+    }
+}
+
 //Library class
 class Library {
     //Available Book 3 hain
     int availableBooks = 3;
 
-    public void borrowBook(int booksRequestedCount) throws Exception {
+    //(VI). We are doing an Assignment as we will add a member also here . and will make a memberInvalid Exception class
+    public void borrowBook(String memberName, int booksRequestedCount) throws Exception {
 
            // Exception 1
             if (booksRequestedCount > availableBooks)
-                // Here we are throwing exception but not handling it. InFact we will add one signature throws Jo Ki Void Ke Sath Likha Jayega throws Exception as we can see there in above
-                throw new Exception("Not enough books are available");
+                //(iii) Ab jo throw wala hain humne already padha h . Now hum yeh BookUnavailableException Jo ki ek custom exception hain woh yahan as an exception ab kaam krega
+                throw new BookUnavailableException("Not enough books are available");
 
             // Exception 2
            if (booksRequestedCount < 0)
            {
                throw new Exception("you must request at least one book");
            }
+
+           //(viii).For memberName condition with throw exception
+          if(memberName == null || memberName.isEmpty())
+              throw  new InvalidMemberException("Invalid Member");
+
     }
 }
 
@@ -29,23 +51,25 @@ class Library {
 
 public class LibraryDemo {
    public static void main(String[] args) {
-       //B.
+       //D.
+       //(iv) Now hu dekh rhe h ki object ekdum perfectly response de rha h. and jo e.prinstack() hain usme bhi (custom Exception) ka result aa rha h
        //3.Making an object of library class
        Library library = new Library();
-
-       // Yeh exception trow krega kyuki available books sirf 3 hain aur hum 10 chaah rhe h, isliye jo catch(Exception e) mein jo diya hain wohi msg show krega iske baad finally wala bhi o/p aayega woh hoga hi
        try {
-           library.borrowBook(-10);
-           //If Book 1 to 3 raha toh yes available otherwise Exception Occurred
+           //(vii). we will add the membername and bookrequested
+           library.borrowBook("john", 1);
+
+           //(X). and hum null de rhe h toh usme InvalidEXCEPTION Error aa jayega
+           library.borrowBook(null, 1);
            System.out.println("If your Request is from 1 to 3 then, Yes book is available");
-       } catch (Exception e) {
-           /*Yeh ho Gya Simple msg*/
-           //System.out.println("Exception Occurred");
+       }
+       //(v) Yahan Catch block banyenge with our custom exception aur printStack krenge toh Jo exception humne banaye h woh aayega. i.e-> BookunvailableException usko ab catch block me rkhenge
+       catch(BookUnavailableException e) {
+           e.printStackTrace();
+       }
 
-           /*Agar hum chahte jo Void function me throw me jo likha h wo as a error humein o/p de toh e.printStackTrace() ka use kr skte h*/
-           //e.printStackTrace();
-
-           /*Now we want that ki, Jo as a error aa rha h in Prinstacktrace wo as a output aaye toh e.getmessage() use kr skte h*/
+       catch (Exception e) {
+           e.printStackTrace();
            System.out.println("Exception Occurred" + " "+e.getMessage());
 
        }
