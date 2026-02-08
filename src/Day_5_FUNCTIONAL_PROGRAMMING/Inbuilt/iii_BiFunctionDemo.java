@@ -3,7 +3,7 @@ package Day_5_FUNCTIONAL_PROGRAMMING.Inbuilt;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 
-public class BiFunctionDemo {
+public class iii_BiFunctionDemo {
 
     //Bi-Function Method
 
