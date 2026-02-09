@@ -79,5 +79,9 @@ public class StreamDemo {
 
 
 
+       /* (VII) all the important concept of Stream and StreamPipeline in the COPY */
+
+
+
    }
 }
