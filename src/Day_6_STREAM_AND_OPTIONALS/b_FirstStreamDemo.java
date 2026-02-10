@@ -36,7 +36,6 @@ public class b_FirstStreamDemo {
          // v) we can use method reference also
                 .toList();
        System.out.println("Even Numbers With Streams 2: "+ " "+ evenNumbers3);
-
    }
 
    //C).  vi) concise code of Predicate even number operation
